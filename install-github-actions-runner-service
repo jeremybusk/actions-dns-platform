@@ -59,12 +59,17 @@ function create_service() {
 Description=Github Actions Systems Runner
 After=$username.service
 [Service]
+User=actions-runner
+WorkingDirectory=/home/actions-runner
 ExecStart=/$homedir/run.sh
 ExecReload=/bin/kill -SIGUSR1 \$MAINPID
 [Install]
 WantedBy=multi-user.target
 EOT"
 sudo systemctl enable $username.service
+sudo systemctl start $username.service
+systemctl is-active $username
+systemctl is-enabled $username
 }
 
 
