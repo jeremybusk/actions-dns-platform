@@ -56,7 +56,7 @@ function create_service() {
 
   sudo bash -c "cat <<EOT > /etc/systemd/system/$username.service
 [Unit]
-Description=REST API for any Postgres database
+Description=Github Actions Systems Runner
 After=$username.service
 [Service]
 ExecStart=/$homedir/run.sh
