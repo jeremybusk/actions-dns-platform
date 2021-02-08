@@ -2,3 +2,5 @@
 set -e
 
 echo "Update Script
+docker-compose down
+docker-compose up -d

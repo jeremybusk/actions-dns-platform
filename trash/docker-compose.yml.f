@@ -38,8 +38,6 @@ services:
   pdns-master:
     image: pschiffe/pdns-mysql:${PDNS_MYSQL_TAG:-latest}
     hostname: ns1.example.com
-    ports:
-      - '40053:53'
     networks:
       pdns:
         ipv4_address: 172.6.0.20
@@ -58,7 +56,7 @@ services:
       - PDNS_webserver=yes
       - PDNS_webserver_address=0.0.0.0
         # - PDNS_webserver_allow_from=172.6.0.0/16
-      - PDNS_webserver_allow_from=0.0.0.0/0
+      - PDNS_webserver_allow_from=172.6.0.0/16,192.168.0.0/16
       - PDNS_version_string=anonymous
       - PDNS_default_ttl=1500
       - PDNS_allow_axfr_ips=172.6.0.21
@@ -71,8 +69,6 @@ services:
   pdns-slave:
     image: pschiffe/pdns-mysql:${PDNS_MYSQL_TAG:-latest}
     hostname: ns2.example.com
-    ports:
-      - '40054:53'
     networks:
       pdns:
         ipv4_address: 172.6.0.21
@@ -89,7 +85,7 @@ services:
       - PDNS_webserver=yes
       - PDNS_webserver_address=0.0.0.0
         # - PDNS_webserver_allow_from=172.6.0.0/16,192.168.0.0/16
-      - PDNS_webserver_allow_from=0.0.0.0/0
+      - PDNS_webserver_allow_from="0.0.0.0/0"
       - PDNS_version_string=anonymous
       - PDNS_disable_axfr=yes
       - PDNS_allow_notify_from=172.6.0.20
